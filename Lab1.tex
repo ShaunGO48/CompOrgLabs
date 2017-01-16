@@ -1,0 +1,75 @@
+\documentclass{article}
+\usepackage{graphicx} % new way of doing eps files
+\usepackage{listings} % nice code layout
+\usepackage[usenames]{color} % color
+\definecolor{listinggray}{gray}{0.9}
+\definecolor{graphgray}{gray}{0.7}
+\definecolor{ans}{rgb}{1,0,0}
+\definecolor{blue}{rgb}{0,0,1}
+% \Verilog{title}{label}{file}
+\newcommand{\Verilog}[3]{
+  \lstset{language=Verilog}
+  \lstset{backgroundcolor=\color{listinggray},rulecolor=\color{blue}}
+  \lstset{linewidth=\textwidth}
+  \lstset{commentstyle=\textit, stringstyle=\upshape,showspaces=false}
+  \lstset{frame=tb}
+  \lstinputlisting[caption={#1},label={#2}]{#3}
+}
+
+
+\author{your names}
+\title{Lab title}
+
+\begin{document}
+\maketitle
+
+\section{Introduction}
+Introduction with problem overview, your design procedure, and rationale.  Be as brief as possible to let me know the big picture of the lab.
+
+\section{Interface}
+This section explains the input and output relationships of the design, so it can be treated as a black box.  I have essentially provided you the inputs, outputs, and inouts, but I want to know you understand why.  What inputs are used and how?  What outputs are used and how?  What sequence of commands need to be performed in order to operate the module?  What form does the data get sent in (binary, two's compliment, excess code, etc.)?  How are they grouped?
+
+\section{Design}
+This is the internal design of the item.  Design description and explanation, including any pictures, charts, etc.  This is the details of what you want to build, but not how to build it.  In senior design terms, this is the specification.
+
+\section{Implementation}
+The Verilog code and explanations of why you implemented this way.  There are many ways to implement a given design in Verilog.  For instance why choose a case statement or ifs?  Why did you trigger on a negedge verses any signal change?  You should reference your code, for example, mine is in Listing~\ref{code:reg} on page~\pageref{code:reg}.  Note you don't have to reference the page, I just wanted to show you how you could, and the power of a label in \LaTeX\ .
+
+%\Verilog{Verilog code for implementing a register.}{code:reg}{../code/register.v}
+
+\section{Test Bench Design}
+This is where you discuss the test benches you wrote, and what they were designed to test.  You should discuss expected errors as well as random errors.  Be sure to include your Verilog code of the testbench, for example, mine is in Listing~\ref{code:regtest} on page~\pageref{code:regtest}.
+
+%\Verilog{Verilog code for testing a register.}{code:regtest}{}
+
+\section{Simulation}
+Through simulation of this program counter, we were able to test a variety of situations. The first situation was that of the fundamental ability of the program counter to increment from a starting value, which we set as zero.A timing diagram depicting this situation can be found in Figure~\ref{fig:regtesti} on page~\pageref{fig:regtesti}.
+
+The second simulation we set out to test was that of the program counter's ability to go from one number to a non-consecutive number in the span of a clock cycle. A timing diagram depicting this situation can be found in Figure~\ref{fig:regtestv} on page~\pageref{fig:regtestv}.
+
+Lastly, we were curious as to the functionality of the reset command, which we hoped would reset the 32-bit register to a value of zero. While initially we did have problems with the syntax of the command, a timing diagram depicting the successful implementation of reset can be found in Figure~\ref{fig:regtestr} on page~\pageref{fig:regtestr}. 
+
+\begin{figure}
+\begin{center}
+\caption{Timing diagram for incrementation.}\label{fig:regtesti}
+\includegraphics[width=0.9\textwidth]{H:/CompOrg/Program_Counter/Images/registertiming.png}
+\end{center}
+\end{figure}
+
+\begin{figure}
+	\begin{center}
+		\caption{Timing diagram for value selection.}\label{fig:regtestv}
+		\includegraphics[width=0.9\textwidth]{H:/CompOrg/Program_Counter/Images/registertiming.png}
+	\end{center}
+\end{figure}
+
+\begin{figure}
+	\begin{center}
+		\caption{Timing diagram for reset.}\label{fig:regtestr}
+		\includegraphics[width=0.9\textwidth]{H:/CompOrg/Program_Counter/Images/registertiming.png}
+	\end{center}
+\end{figure}
+
+\section{Conclusions}
+In this first lab, we set out to develop a program counter which would count sequentially within the span of a 32 bit register. This program counter was developed and tested under the expectations that it would be able to hold a starting value, count up from that value to an extent of 32 bits, and reset upon command. With the lab completed, we were able to meet these expectations testing the counter's ability to increment to the maximum capacity of 32 bits, as well as being able to reset the register to a desired value. In this lab, it was learned that it is not necessary to test every bit combination in the register to ensure functionality. In contrast, by ensuring that each bit is working, it is safe to believe that each combination can be achieved successfully.
+\end{document} 
